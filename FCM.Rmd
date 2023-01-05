@@ -67,6 +67,16 @@ library (cluster)
 library(fclust)
 
 ```{r eval=FALSE}
+```
+
+# Import Data
+```{r}
+data("iris")
+
+```
+
+
+```
 
 
 # Referensi
