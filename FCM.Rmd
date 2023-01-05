@@ -1,6 +1,6 @@
 ---
-title: "My Document"
-author: "Deden Istiawan-Institut Teknologi Statistika dan Bisnis Muhammadiyah"
+title: "Algoritma Fuzzy C-means"
+author: "Putri Setyaningsih-Institut Teknologi Statistika dan Bisnis Muhammadiyah"
 date: "`r Sys.Date()`"
 output: 
   html_document:
@@ -23,24 +23,50 @@ text-align: justify}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# R Markdown
+# Algoritma Fuzzy C-means
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents [@deCarvalho2012]. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Fuzzy c-means merupakan salah satu jenis soft clustering dimana dalam mengelompokan suatu data, setiap data bisa dimiliki lebih dari satu cluster.Fuzzy C-Means merupakan salah satu metode fuzzy clustering untuk mengelompokkan dataset menjadi K cluster. Jumlah cluster (K) harus lebih besar dari 1. FCM ini adalah pengembangan dari metode k-means, atau dengan kata lain FCM merupakan versi fuzzy dari k-means dengan beberapa modifikasi.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+# Tahapan Algoritma Fuzzy C-means
 
-```{r cars}
-summary(cars)
-```
+1.Menentukan banyak cluster (k) yang akan dibuat.
 
-## Including Plots
+2.Menentukan nilai proporsi untuk setiap data poin secara random untuk masuk dalam suatu cluster.
 
-You can also embed plots, for example:
+3.Menghitung nilai centroid. Dalam menghitung nilai centroid, kita menggunakan formula berikut :
+\[C_j = \frac{\sum u_{ij}^mx}{\sum u_{ij}^m}\]
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+4.Menghtung kembali nilai proporsi untuk setiap data poin untuk masuk pada setiap cluster. fprmula yang digunakan yaitu sebagai berikut :
+\[u_{ij}^m = \frac{1}{\sum (\frac{|x_i - c_j|}{|x_i - c_k|})^\frac{2}{m-1}}\]
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+# Eksperimen Algoritma Fuzzy C-means
+
+## library
+```{r eval=FALSE}
+library (ppclust)
+
+## Loading library package: ppclust
+
+## Warning: package 'ppclust' was built under R version 3.5.1
+
+library (factoextra)
+
+## Welcome! Related Books: `Practical Guide To Cluster Analysis in R` at https://goo.gl/13EFCZ
+
+library (dplyr)
+
+## The following objects are masked from 'package:stats':
+##
+##     filter, lag
+
+## The following objects are masked from 'package:base':
+##
+##     intersect, setdiff, setequal, union
+
+library (cluster)
+library(fclust)
+
+```{r eval=FALSE}
+
 
 # Referensi
