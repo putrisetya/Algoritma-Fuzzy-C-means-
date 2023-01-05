@@ -72,11 +72,20 @@ library(fclust)
 # Import Data
 ```{r}
 data("iris")
+x=iris[,-6]
+x[1:14,]
 
 ```
 
-
 ```
+```{r}
+pairs(x, col=iris[,5])
+```
+
+```{r}
+cor(iris[,1:4])
+```
+
 
 
 # Referensi
