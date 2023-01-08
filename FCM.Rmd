@@ -45,8 +45,6 @@ Fuzzy c-means merupakan salah satu jenis soft clustering dimana dalam mengelompo
 ```{r eval=FALSE}
 library (ppclust)
 
-## Loading library package: ppclust
-
 ## Warning: package 'ppclust' was built under R version 3.5.1
 
 library (factoextra)
@@ -72,20 +70,43 @@ library(fclust)
 # Import Data
 ```{r}
 data("iris")
-x=iris[,-6]
-x[1:14,]
-
-```
+z=iris[,-6]
+z[1:14,]
 
 ```
 ```{r}
-pairs(x, col=iris[,5])
+pairs(z, col=iris[,5])
 ```
+
 
 ```{r}
 cor(iris[,1:4])
 ```
 
+```{r}
+library (psych)
+
+## The following objects are masked from 'package:ggplot2':
+## 
+##     %+%, alpha
+
+## The following object is masked from 'package:ppclust':
+## 
+##     pca
+
+```
+
+
+```{r}
+pairs.panels(iris[-5], method = "pearson")
+```
+
 
 
 # Referensi
+
+https://rpubs.com/nadirabelinda/FuzzyC-Means
+
+https://rpubs.com/inayatus/fuzzy-c-means
+
+https://rpubs.com/rahulSaha/Fuzzy-CMeansClustering
