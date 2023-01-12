@@ -23,20 +23,24 @@ text-align: justify}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Algoritma Fuzzy C-means
+# Pengertian Algoritma Fuzzy C-means
 
-Fuzzy c-means merupakan salah satu jenis soft clustering dimana dalam mengelompokan suatu data, setiap data bisa dimiliki lebih dari satu cluster.Fuzzy C-Means merupakan salah satu metode fuzzy clustering untuk mengelompokkan dataset menjadi K cluster. Jumlah cluster (K) harus lebih besar dari 1. FCM ini adalah pengembangan dari metode k-means, atau dengan kata lain FCM merupakan versi fuzzy dari k-means dengan beberapa modifikasi.
+Fuzzy c-means merupakan  mpngelompokan suatu data yan menggunakan salah satu jenis soft clustering.Fuzzy C-Means adalah  salah satu metode fuzzy clustering untuk mengelompokkan dataset menjadi K cluster.
+
+Jumlah cluster (K) harus lebih besar dari 1. Fuzzy C-Means adalah pengembangan dari metode k-means dengan beberapa modifikasi.
 
 # Tahapan Algoritma Fuzzy C-means
 
+berikut adalah tahapan algotitma fuzzy C-Means
+
 1.Menentukan banyak cluster (k) yang akan dibuat.
 
-2.Menentukan nilai proporsi untuk setiap data poin secara random untuk masuk dalam suatu cluster.
+2.Menentukan nilai proporsi setiap data poin secara random untuk masuk dalam suatu cluster.
 
-3.Menghitung nilai centroid. Dalam menghitung nilai centroid, kita menggunakan formula berikut :
+3.Menghitung nilai centroid. Dalam menghitung nilai centroid, menggunakan formula berikut :
 \[C_j = \frac{\sum u_{ij}^mx}{\sum u_{ij}^m}\]
 
-4.Menghtung kembali nilai proporsi untuk setiap data poin untuk masuk pada setiap cluster. fprmula yang digunakan yaitu sebagai berikut :
+4.Menghtung ulang nilai proporsi setiap data poin untuk masuk pada setiap cluster. menggunakan formula berikut :
 \[u_{ij}^m = \frac{1}{\sum (\frac{|x_i - c_j|}{|x_i - c_k|})^\frac{2}{m-1}}\]
 
 # Eksperimen Algoritma Fuzzy C-means
@@ -44,31 +48,33 @@ Fuzzy c-means merupakan salah satu jenis soft clustering dimana dalam mengelompo
 ## Library
 ```{r}
 library (ppclust)
+```
+
+```{r}
 library (factoextra)
+```
+
+```{r}
 library (dplyr)
+```
+
+```{r}
 library (cluster)
+```
+
+```{r}
 library(fclust)
 ```
 
-# Import Data
+### Import Data
+
 ```{r}
 library(readxl)
-data <- read_excel("D:/dataset/Anemia.xlsx")
+data_penguin <- read_excel("D:/dataset/Data Penguin.xlsx")
 ```
 
 ```{r}
-data
-```
-
-```{r}
-data_anemia <- data[-1, -6]
-```
-
-```{r}
-data_anemia
-```
-```{r}
-
+data_penguin [-1]
 ```
 
 
@@ -76,6 +82,70 @@ data_anemia
 library (psych)
 ```
 
+```{r}
+pairs.panels(iris[,-5], method = "pearson")
+```
+#### Tahap Fuzzy C-Means
+
+```{r}
+res.fcm <- fcm(data_penguin, centers=4)
+```
+
+##### Fuzzy Membership Matrix
+
+```{r}
+as.data.frame(res.fcm$u)[1:6,]
+```
+
+# Initial and final cluster prototypes matrices
+```{r}
+res.fcm$v0
+```
+
+```{r}
+res.fcm$v
+```
+
+```{r}
+res.fcm$v
+```
+
+# Run FCM with Multiple Starts
+
+```{r}
+res.fcm <- fcm(x, centers=3, nstart=5)
+
+res.fcm$func.val
+```
+
+```{r}
+res.fcm$iter
+```
+
+```{r}
+res.fcm$best.start
+```
+
+```{r}
+summary(res.fcm)
+```
+
+# Pairwise Scatter Plots
+
+```{r}
+plotcluster(res.fcm, cp=1, trans=TRUE)
+```
+
+# Cluster Plot with fviz_cluster
+```{r}
+res.fcm2 <- ppclust2(res.fcm, "kmeans")
+fviz_cluster(res.fcm2, data = x, 
+  ellipse.type = "convex",
+  palette = "jco",
+  repel = TRUE)
+```
+
+#Cluster Plot with clusplot
 
 # Referensi
 
