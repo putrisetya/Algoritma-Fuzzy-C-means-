@@ -68,33 +68,38 @@ library(fclust)
 
 ### Import Data
 
-```{r}
+```{r warning=FALSE}
 library(readxl)
-data_penguin <- read_excel("D:/dataset/Data Penguin.xlsx")
+data <- read_excel("D:/dataset/Data Penguin.xlsx")
+```
+
+```{r warning= FALSE}
+data
 ```
 
 ```{r}
-data_penguin [-1]
+data_penguin = data[-1]
 ```
 
+```{r}
+data_penguin
+```
 
 ```{r}
 library (psych)
 ```
 
-```{r}
-pairs.panels(iris[,-5], method = "pearson")
-```
 #### Tahap Fuzzy C-Means
 
 ```{r}
-res.fcm <- fcm(data_penguin, centers=4)
+library(ppclust)
+res.fcm <-fcm (data_penguin, centers = 5)
 ```
 
 ##### Fuzzy Membership Matrix
 
 ```{r}
-as.data.frame(res.fcm$u)[1:6,]
+as.data.frame(res.fcm$u)[1:10,]
 ```
 
 # Initial and final cluster prototypes matrices
@@ -107,13 +112,14 @@ res.fcm$v
 ```
 
 ```{r}
-res.fcm$v
+summary(res.fcm)
 ```
+
 
 # Run FCM with Multiple Starts
 
 ```{r}
-res.fcm <- fcm(x, centers=3, nstart=5)
+res.fcm <- fcm(data_penguin, centers=4, nstart=10)
 
 res.fcm$func.val
 ```
@@ -133,19 +139,20 @@ summary(res.fcm)
 # Pairwise Scatter Plots
 
 ```{r}
-plotcluster(res.fcm, cp=1, trans=TRUE)
+plotcluster(res.fcm, cp=5, trans=TRUE)
 ```
 
-# Cluster Plot with fviz_cluster
+#gap index
 ```{r}
-res.fcm2 <- ppclust2(res.fcm, "kmeans")
-fviz_cluster(res.fcm2, data = x, 
-  ellipse.type = "convex",
-  palette = "jco",
-  repel = TRUE)
+library(clusterSim)
 ```
 
-#Cluster Plot with clusplot
+#Davies-Bouldin’s index
+
+```{r}
+cl2 <- pam(data_penguin[,1:4], 5)
+print(index.DB(data_penguin[,1:4], cl2$clustering, centrotypes="centroids"))
+```
 
 # Referensi
 
