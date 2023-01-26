@@ -23,15 +23,15 @@ text-align: justify}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Pengertian Algoritma Fuzzy C-means
+# Definition of Algoritma Fuzzy C-means
 
-Fuzzy c-means merupakan  mpngelompokan suatu data yan menggunakan salah satu jenis soft clustering.Fuzzy C-Means adalah  salah satu metode fuzzy clustering untuk mengelompokkan dataset menjadi K cluster.
+Fuzzy c-means merupakan  pengelompokan suatu data yang menggunakan salah satu jenis soft clustering.Fuzzy C-Means adalah  salah satu metode fuzzy clustering untuk mengelompokkan dataset menjadi K cluster.
 
 Jumlah cluster (K) harus lebih besar dari 1. Fuzzy C-Means adalah pengembangan dari metode k-means dengan beberapa modifikasi.
 
-# Tahapan Algoritma Fuzzy C-means
+# Stages of Fuzzy C means
 
-berikut adalah tahapan algotitma fuzzy C-Means
+berikut ini adalah tahapan algotitma fuzzy C-Means
 
 1.Menentukan banyak cluster (k) yang akan dibuat.
 
@@ -68,6 +68,8 @@ library(fclust)
 
 ### Import Data
 
+Sebelum melakukan clustering,Import terlebih dahulu data yang kita butuhkan. Pada kali ini kita menggunakan dataset Penguin.
+
 ```{r warning=FALSE}
 library(readxl)
 data <- read_excel("D:/dataset/Data Penguin.xlsx")
@@ -89,7 +91,7 @@ data_penguin
 library (psych)
 ```
 
-#### Tahap Fuzzy C-Means
+#### Fuzzy C-Means
 
 ```{r}
 library(ppclust)
@@ -139,15 +141,15 @@ summary(res.fcm)
 # Pairwise Scatter Plots
 
 ```{r}
-plotcluster(res.fcm, cp=5, trans=TRUE)
+plotcluster(res.fcm, cp=3, trans=TRUE)
 ```
 
-#gap index
+# gap index
 ```{r}
 library(clusterSim)
 ```
 
-#Davies-Bouldin’s index
+# Davies-Bouldin’s index
 
 ```{r}
 cl2 <- pam(data_penguin[,1:4], 5)
@@ -156,8 +158,10 @@ print(index.DB(data_penguin[,1:4], cl2$clustering, centrotypes="centroids"))
 
 # Referensi
 
+https://rpubs.com/rahulSaha/Fuzzy-CMeansClustering
+
 https://rpubs.com/nadirabelinda/FuzzyC-Means
 
 https://rpubs.com/inayatus/fuzzy-c-means
 
-https://rpubs.com/rahulSaha/Fuzzy-CMeansClustering
+https://github.com/putrisetya
